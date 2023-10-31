@@ -1,0 +1,26 @@
+apiVersion: v2
+name: outline
+version: 0.1.0
+kubeVersion: '>=1.27.0-0'
+description: The Outline helm chart to deploy it in kubernetes clusters
+type: application
+keywords:
+- outline
+- wiki
+- collaborative
+- teams
+- knowledge
+home: https://www.getoutline.com/
+icon: https://getoutline.com/images/logo.svg
+sources:
+- https://github.com/outline/outline
+dependencies:
+- name: common
+  repository: oci://registry-1.docker.io/bitnamicharts
+  tags:
+  - bitnami-common
+  version: 2.x.x
+maintainers:
+- name: sigo
+  url: https://github.com/sgolod
+appVersion: 0.72.2
