@@ -2,7 +2,7 @@ apiVersion: v2
 name: outline
 version: 0.1.0
 kubeVersion: '>=1.27.0-0'
-description: The Outline Wiki helm chart to deploy it in kubernetes clusters
+description: The Outline helm chart to deploy it in kubernetes clusters
 type: application
 keywords:
 - outline

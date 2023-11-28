@@ -19,7 +19,7 @@ spec:
       {{- end }}
       labels:
         {{- include "outline.labels" . | nindent 8 }}
-        {{- with .Values.podLabels }}
+	{{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
@@ -36,27 +36,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if not .Values.extraEnvVars000 }}
-          env:
-            {{- if .Values.config.publicURI }}
-            - name: JMX_PORT
-              value: {{ .Values.config.publicURI | quote }}
-            {{- end }}
-            {{- if .Values.extraEnvVars }}
-            {{- include "common.tplvalues.render" ( dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
-            {{- end }}
-          {{- end }}
-          {{- if or .Values.extraEnvVarsCM .Values.extraEnvVarsSecret }}
-          envFrom:
-            {{- if .Values.extraEnvVarsCM }}
-            - configMapRef:
-                name: {{ include "common.tplvalues.render" (dict "value" .Values.extraEnvVarsCM "context" $) }}
-            {{- end }}
-            {{- if .Values.extraEnvVarsSecret }}
-            - secretRef:
-                name: {{ include "common.tplvalues.render" (dict "value" .Values.extraEnvVarsSecret "context" $) }}
-            {{- end }}
-          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
